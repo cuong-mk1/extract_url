@@ -1,0 +1,6 @@
+flask==3.0.2
+psycopg2-binary
+trafilatura
+requests==2.31.0
+bs4
+chardet
