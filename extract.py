@@ -8,7 +8,7 @@ from trafilatura import extract
 from urllib.parse import urlparse
 
 publisher_domain = 'www.atpress.ne.jp'
-company_keywords = ["株式会社","有限会社","合同会社" ,"合名会社" ,"合資会社","社団法人","財団法人","協会"]
+company_keywords = ["株式会社","有限会社","合同会社" ,"合名会社" ,"合資会社","社団法人","財団法人","協会","実行委員会"]
 
 def contains_domain(url, domain):
     parsed_url = urlparse(url)
