@@ -83,12 +83,47 @@ def extractURL(url):
     for tag in soup.find_all("div", {"class": "more-link-alt"}):
         tag.decompose()
 
+    #check ratio 
+    # Get text content
     
+    # Get the remaining HTML content
+
+    html_content = str(soup)
+    text = soup.get_text()
+    text_length = len(text.strip())
+    
+    # Get total HTML content length
+    html_length = len(response.text)
+    # print(text_length)
+
+    # print(html_length)
+
+    
+    ##############
     html = str(soup)
+    # print(html)
 
     extract_result = extract(html, output_format='json',
                              url=url, include_images=False)
     extract_data = json.loads(extract_result)
+    ## Get ratio
+    leng_content = len(extract_data["text"])
+    # print(len(extract_data["text"]))
+
+    ratio_content_text = len(extract_data["text"]) / html_length
+    ratio_soup_text = text_length / html_length
+
+    # print(ratio_content_text)
+    if (((ratio_content_text < 0.008) and (leng_content < 1000)) and (ratio_soup_text < 0.01 or html_length <50000)): 
+        # print("IS_NOT_DETAIL_PAGE")
+        outputs = {
+                "meta": {
+                    "code": 203, 
+                    "message" : "IS_NOT_DETAIL_PAGE"
+                }
+            }
+        response = json.dumps(outputs, ensure_ascii=False, indent=4)
+        return response
     ## cuong-san:  Check source hostname  
     check_exist_source={}
     source_hostname=''
